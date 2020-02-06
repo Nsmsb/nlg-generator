@@ -114,6 +114,7 @@ class Pipo {
 
         } while (i++ < nbWord);
 
+        System.out.println(".");
         System.out.println("Fin du compte rendu");
     }
 }

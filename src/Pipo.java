@@ -20,8 +20,6 @@ class Pipo {
     }
     
     public void newWorsSeq(String w1, String w2) {
-        //System.out.println(" "+w1+"  "+w2+" ");
-        // This is were you need to update the language model (hash of hashes)
 
         Hashtable<String, Integer> w1HashTable;
 

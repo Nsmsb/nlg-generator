@@ -9,7 +9,6 @@ class WordPair {
 
     void updateValue() {
         this.value++;
-        System.out.println(this.value);
     }
 
     String getWord() {

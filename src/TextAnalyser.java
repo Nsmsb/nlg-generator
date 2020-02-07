@@ -40,7 +40,13 @@ class TextAnalyser {
         try {
             while (in1.hasNext()) {
                 
-                str = in1.next();
+
+                /*
+                *   We tried to eleminate all ponctuations and take in consediration only words
+                *   to run this analyisis discomment the following block of code and comment the othe code
+                *   we used the same way you handled words to get the same analysis.
+                */
+
                 // words = in1.next().split("\\W+");
 
                 // for (String word : words) {
@@ -51,6 +57,8 @@ class TextAnalyser {
                     // else
                     //     wordsFreqs.put(word, new WordPair(word));
                 // }
+
+                str = in1.next();
 
                 if (str.matches("(.*)[.,!?<>=+-/]")) {
                     words = str.split("(?=[.,!?<>=+-/])|(?<=])");
@@ -75,6 +83,7 @@ class TextAnalyser {
         }
     }
 
+    // methode to get the most frequent Nth words
     public WordPair[] getNthFreqWords(int n) {
         WordPair[] result = new WordPair[this.wordsFreqs.size()];
         result = this.wordsFreqs.values().toArray(result);

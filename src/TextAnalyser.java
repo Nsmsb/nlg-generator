@@ -27,26 +27,48 @@ class TextAnalyser {
         return this.words;
     }
 
-    public int getWerdFrequency(String word) {
-        if (this.wordsFreqs.contains(word))
-            return (wordsFreqs.get(word).getValue() / this.words);
+    public double getWerdFrequency(String word) {
+        if (this.wordsFreqs.containsKey(word))
+            return ((double)this.wordsFreqs.get(word).getValue() / (double)this.words);
+        else
         return 0;
     }
 
     public void analyse() {
         String[] words;
+        String str;
         try {
             while (in1.hasNext()) {
-                words = in1.next().split("\\W+");
+                
+                str = in1.next();
+                // words = in1.next().split("\\W+");
+
+                // for (String word : words) {
+                    // if (wordsFreqs.containsKey(word)) {
+                    //     wordsFreqs.get(word).updateValue();
+                    //     this.words++;
+                    // }
+                    // else
+                    //     wordsFreqs.put(word, new WordPair(word));
+                // }
+
+                if (str.matches("(.*)[.,!?<>=+-/]")) {
+                    words = str.split("(?=[.,!?<>=+-/])|(?<=])");
+                } else { 
+                    words = new String[1];
+                    words[0] = str;
+                }
 
                 for (String word : words) {
                     if (wordsFreqs.containsKey(word)) {
                         wordsFreqs.get(word).updateValue();
-                        this.words++;
                     }
-                    else
+                    else {
                         wordsFreqs.put(word, new WordPair(word));
-                }
+                    }
+                    this.words++;
+                    }
+
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -56,7 +78,6 @@ class TextAnalyser {
     public WordPair[] getNthFreqWords(int n) {
         WordPair[] result = new WordPair[this.wordsFreqs.size()];
         result = this.wordsFreqs.values().toArray(result);
-        System.out.println("hhhhh");
         Arrays.sort(result, new Comparator<WordPair>() {
             public int compare(WordPair w1, WordPair w2) {
                 return w2.getValue() - w1.getValue();
